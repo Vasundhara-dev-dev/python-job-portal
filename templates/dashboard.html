@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Welcome, {{ user.name }}</h2>
+
+    <form method="POST" action="/upload_resume" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="resume" class="form-label">Upload Resume (PDF/DOCX)</label>
+            <input type="file" class="form-control" id="resume" name="resume" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <div class="mt-4">
+        <a href="/resume_feedback" class="btn btn-success me-2">See Resume Feedback</a>
+        <a href="/job_list" class="btn btn-info">View Matching Jobs</a>
+    </div>
+</div>
+{% endblock %}
