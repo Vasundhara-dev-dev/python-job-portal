@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">🔍 Career Advice & Recommendations</h2>
+
+    {% if advice %}
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                <h5>👤 Candidate Info</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Name:</strong> {{ advice.name }}</p>
+                <p><strong>Email:</strong> {{ advice.email }}</p>
+                <p><strong>Current Skills:</strong> {{ advice.current_skills | join(', ') }}</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-warning">
+                <h5>⚠️ Skill Gaps Identified</h5>
+            </div>
+            <div class="card-body">
+                {% if advice.skill_gaps %}
+                    <ul class="list-group">
+                        {% for skill in advice.skill_gaps %}
+                            <li class="list-group-item">{{ skill }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-success">No major skill gaps found! You’re on track 🎯</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h5>🎓 Recommended Courses & Resources</h5>
+            </div>
+            <div class="card-body">
+                {% if advice.recommendations %}
+                    <ul class="list-group">
+                        {% for rec in advice.recommendations %}
+                            <li class="list-group-item">
+                                <strong>{{ rec.skill }}</strong> – <a href="{{ rec.link }}" target="_blank">{{ rec.platform }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No recommendations available.</p>
+                {% endif %}
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            No advice available. Please upload your resume and let the AI analyze it first.
+        </div>
+    {% endif %}
+
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary mt-3">⬅ Back to Dashboard</a>
+</div>
+{% endblock %}
