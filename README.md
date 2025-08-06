@@ -29,3 +29,47 @@ An intelligent web-based job portal that uses AI to streamline the recruitment p
 ---
 ## 📁 Project Structure
 
+job-portal/
+├── app.py
+├── config.py
+├── models.py
+├── requirements.txt
+├── README.md
+├── static/
+│ ├── css/
+│ ├── js/
+│ ├── img/
+│ └── uploads/
+├── templates/
+│ ├── base.html
+│ ├── login.html
+│ ├── register.html
+│ ├── dashboard.html
+│ ├── resume_feedback.html
+│ ├── job_list.html
+│ ├── employer_dashboard.html
+│ └── career_advice.html
+└── utils/
+├── resume_parser.py
+├── job_matcher.py
+├── career_counselor.py
+└── helper.py
+
+📌 Example Use Cases
+✅ Upload your resume and get AI feedback instantly.
+
+✅ Get job recommendations that match your skills.
+
+✅ Employers can post jobs and filter candidates using AI.
+
+✅ Students get personalized career advice and learning suggestions.
+
+🤖 AI Features in Detail
+Resume Parsing: Extract name, skills, education, experience.
+
+Skill Matching: AI compares required vs. actual skills using NLP (TF-IDF + cosine similarity).
+
+Career Counseling: Generates advice on missing skills and recommends relevant career paths or courses.
+
+🤝 Contributing
+Pull requests are welcome! For major changes, please open an issue first.
