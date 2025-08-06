@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Employer Dashboard</h2>
+
+    <!-- Post New Job Button -->
+    <a href="{{ url_for('post_job') }}" class="btn btn-primary mb-4">Post New Job</a>
+
+    <!-- Jobs Table -->
+    {% if jobs %}
+        {% for job in jobs %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>{{ job.title }} <small class="text-muted">at {{ job.company }}</small></h5>
+                    <p class="mb-0"><strong>Posted:</strong> {{ job.posted_at.strftime('%Y-%m-%d') }}</p>
+                </div>
+                <div class="card-body">
+                    <p><strong>Required Skills:</strong> {{ job.required_skills }}</p>
+                    
+                    {% if job.matched_candidates %}
+                        <h6>Matched Candidates:</h6>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Skills</th>
+                                    <th>Match Score</th>
+                                    <th>Resume</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for candidate in job.matched_candidates %}
+                                <tr>
+                                    <td>{{ candidate.name }}</td>
+                                    <td>{{ candidate.email }}</td>
+                                    <td>{{ candidate.skills }}</td>
+                                    <td>{{ candidate.match_score }}%</td>
+                                    <td>
+                                        <a href="{{ url_for('static', filename='uploads/resumes/' + candidate.resume_file) }}" target="_blank" class="btn btn-outline-secondary btn-sm">View Resume</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p class="text-muted">No matched candidates found yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>You haven't posted any jobs yet.</p>
+    {% endif %}
+</div>
+{% endblock %}
